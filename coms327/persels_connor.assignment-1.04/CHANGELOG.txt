@@ -1,0 +1,8 @@
+MARCH 7:
+	Copied 1.03 solution and created the trainer structure.
+MARCH 8:
+	Created the placing system for the various trainers.
+	Exanded character enums.
+March 9:
+	Implemented prio queue and movement style.
+	Trainer movement bug evident.

@@ -1,0 +1,9 @@
+FEB 23:
+	Completed implementation of Dijkstra's algorithm for both the hiker and rival.
+FEB 22:
+	Backtracked and nearly started fresh from 1.02 solution code.
+	PC now starts on every map in a new location randomized on the path. PC tends to spawn more to the left side of the map.
+FEB 16:
+	Worked partway on randomizing where the player spawns on the path, can't currently compile.
+FEB 15:
+	Retrieved the submission code from assignment 1.02.

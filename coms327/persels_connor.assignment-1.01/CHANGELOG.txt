@@ -1,0 +1,8 @@
+JAN 27: 
+	Attempted to generate a basic map. 
+	Bug: Map being represented by 2d array isn't printing the game correctly.
+JAN 28: 
+	Implemented basic map generating by map boxed in by rocks and filled in with grass. Can print the map.
+	Fixed: Map wasn't printing correctly because the code was being compiled as "generato" but being ran as "./generator" which was an old file.
+FEB 1: 
+	Implemented enums representing terrain types and started working on map seeding.

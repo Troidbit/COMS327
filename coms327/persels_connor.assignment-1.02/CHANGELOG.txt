@@ -1,0 +1,10 @@
+FEB 9 2022:
+	ADDED:     Completed implementation of peeking/flying and formated the ux to look nicer with the required map cooardinates being displayed.
+	ADDED:     Paths connect between maps.	
+
+FEB 8 2022: 
+	ADDED:     Malloc() and free() to dynamically save and free memory for the game world. 
+	STARTED:   Implementing flying/peeking around the world.
+
+FEB 7 2022: 
+	ADDED:     Started with solution code from 1.01 and implemented global variables for the soon to come 2d world array.

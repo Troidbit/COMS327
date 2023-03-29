@@ -1,0 +1,175 @@
+Lecture Week 02
+
+* Final items for assignment submission
+** README for assignments
+   About 150 words or less
+   How you have (or have not) met the specification
+   Functions we should look at
+   Important changes to previous functionality* README for assignments
+   Dual purpose: To help you think about what you've developed in the context
+   of the specification, and to help the graders quickly understand what to
+   look at to evaluate your work.
+   Should include names and locations of important functions and data structures.
+   Should include discussion on what you have done to meet the specification.
+   If you have failed to meet the specification in any way, it should explicitly
+   say that, as well.
+** CHANGELOG for assignments
+   Running list of your work and changes throughout the term.  No length limit.
+   Think of it as a "diary" of what you have done on your project.  Update it
+   every time you work with a timestamp and what you changed.  If you discover
+   a bug, document it here, even if you haven't fixed it yet.
+** "Tarballs"
+   Let <dir> be the name of the directory you want to package.  Build a
+   tarball with the command:
+     tar cvfz <dir>.tar.gz <dir>
+   and expand a corresponding archive with
+     gzip -dc <dir>.tar.gz | tar xvf -
+   '|' is a pipe.  It tells the shell to take the output of the first 
+   command and write it to the input of the second.  When tar's main 
+   argument is '-', it reads from standard input.
+** File transfer to and from pyrite
+   scp / pscp
+   Both of these command line tools use the same syntax.  The only difference
+   is there name.  These are utilities that copy files, just like 'cp',
+   except that arguments may be remote, with a remove file being specified:
+     <username>@<host>:<file>
+   Copy the file with
+     scp <from> <to>
+   or use pscp.  So to copy a file, say tour.c, from my local machine to
+   *pyrite, I'd issue the command:
+     scp tour.c sheaffer@pyrite.cs.iastate.edu:.
+* Needed for assignment 1.01
+** rand(), srand(), time()
+   Functions that give us random numbers
+** int rand(void)
+   #include <stdlib.h>
+   returns a random number less than or equal to RAND_MAX (2^31 - 1)
+** void srand(unsigned int seed)
+   Seeds  the random number generator
+   only seed it once, usually at initialization time
+** time_t time(time_t *t)
+   #include <time.h>
+   srand(time(NULL));
+* Stages of Compilation
+** Last time talked about gcc switches -Wall, -Werror, -g, -ggdb, and -o
+** Makefiles (usually) do compilation in stages, so before we talk about
+   Makefiles, let's finish our discussion on the stages of compilation.
+*** Preprocessing
+    Always runs befor the compiler
+    gcc -E or cpp
+*** Compilation
+    Converts the high-level language code to assembly
+    gcc -S
+*** Assembly
+    Converts assembly code to machine language (object code)
+    gcc -c
+*** Linking
+    gcc (no arguments)
+
+* More about Makefiles: Generating dependencies
+    gcc -MM
+    "gcc -MM *.c" will give you a list of all source file dependencies.  
+    You'll only need to supply build rules and dependencies for the 
+    final executable.
+
+* Representing arrays
+** How do we declare an array?
+   int array[8];
+** What does that declaration mean?
+   The compiler allocates a block of contiguous storage large enough for 
+   8 integers
+** How is the array laid out in memory?
+   Contiguously.
+   If we allocate a multi-dimensional array, it's still laid out
+   contiguously.  Consider a two dimensional array of ints:
+     int matrix[4][4]
+   This allocates 4 * 4 * sizeof (int) bytes.  On most machines,
+   sizeof (int) will be 4 (the standard requires only that it is at least
+   4).  So 64 contiguous bytes.  We can access the third row, second column 
+   with
+     matrix[2][1]
+   (remember, we're zero indexed!).  What's the address of that index?
+     matrix + (2 * 4) + 1
+   where the 1 and the 2 are just as in the array notation, and the 4 is the 
+   number of columns.
+* Pointers
+  Declare a new pointer variable by using a '*' in the declaration.  So 
+  a pointer, p, to an int is declared:
+    int *p;
+** Address and dereference operators, and the Relationship between
+   pointers and arrays
+
+   An array name corresponds with the address of the array, so an array can
+   be assigned to a pointer, so
+     p = array;
+   is legal code, and we can access the elements of array by indexing p, 
+   just as we do by indexing array, so for all i,
+     p[i] == array[i]
+   Suppose we have an int j.  We can also point p at j by taking j's address
+   and assigning it to p:
+     p = &j;
+   '&' is the address operator.  We can use the dereference operator, '*',
+   to access the information stored at that address:
+     *p == j
+   And remember how we found an address associated with an array index?  We
+   can dereference that address to get the value stored there:
+     p = matrix;
+     *(p + (2 * 4) + 1) == matrix[2][1]
+* Typedefs
+  Allows you to create an alias for a type
+  typedef <extant type> <new name>;
+  typedef int time_t;
+* Structures
+  Records in C; classes are based on these.
+  Use the struct keyword
+
+  struct <name> {
+    <typename> <fieldname>;
+    ....
+    ....
+  };
+
+  Rooms in our dungeon might be:
+  struct room {
+    int x_pos;
+    int y_pos;
+    int x_size;
+    int y_size;
+  };
+
+** Accessing fields
+   dot vs. arrow
+   Accessing a field in a struct is done with two operators, the dot 
+   operator and the arrow operator.
+   The arrow operator is used when the structure is accessed through a
+   pointer.
+   If you have an instance of a struct, you access it with the dot operator
+   instead.
+
+   struct room r;
+   r.x_pos = 1;
+   r.y_pos = 11;
+
+   struct room *p;
+
+   p = &r;
+
+   p->x_size = 5;
+   p->y_size = 7;
+
+** Parameter passing in C
+   It's faster to pass structs by address.
+   A struct passed by value is copied, so changes to its fields
+   "disappear" when the function returns.
+   On the other hand, when passed by address, the changes persist.
+   Arguably, it's safer to pass by value if you make no changes, but
+   you can pass a constant pointer for that and still get the speed
+   advantage.
+** Dynamic allocation
+   Dynamic storage is allocated with malloc(3).  Any time you allocate
+   something, you must return it to the system with free(3).  In order
+   to use these functions, you need to include stdlib.h.
+   It is possible for malloc() to fail.  When it does, it returns NULL.
+   You should check for this!  We didn't in class, but I've modified
+   the queue program to handle it, and I'll talk about it in a future
+   class.

@@ -1,0 +1,6 @@
+APRIL 5:
+	+Implemented the basic box
+	+Parsed the extra two files needed
+APRIL 6:
+	+Included full poke-stat functionality
+	+Added ability to encounter wild pokemon in grass ':'

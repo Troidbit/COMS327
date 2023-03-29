@@ -1,0 +1,4 @@
+Jan 19: Started writing knights tour
+Jan 20: Added recursive backtracking algorithm; still debugging
+Jan 22: Fixed infinite recursion; seems to work now.
+

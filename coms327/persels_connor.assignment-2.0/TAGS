@@ -1,0 +1,8 @@
+
+game.h,128
+# define GAME_H2,15
+typedef struct tile 4,32
+	int adjacent_bombs;5,54
+	int is_bomb;6,75
+	int revealed;7,89
+} tile_t;8,104

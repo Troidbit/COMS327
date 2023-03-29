@@ -1,0 +1,8 @@
+APR 20:
+	*Working on the trainer battles
+	*Pokemon encounters to be plugged in as soon as trainer battles are
+		flushed out.
+APR 19:
+	*Started implementing windows and the ncurses structure of how the
+		battles will be displayed.
+	*Imported solution code from 1.07

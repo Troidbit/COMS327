@@ -1,0 +1,13 @@
+MAR 24:
+    *Fixed segfault immediately after trying to move back to a map
+    +Added trainer lists window
+MAR 23:
+    +Added user interface
+    +Added player Control
+    +Added world navigation
+    +Added short npc Battles
+    +Added mart and center windows
+MAR 22:
+    +Implemented ncurses
+    *Fixed print_map() to addch instead of putch for ncurses functionality
+    +Added color

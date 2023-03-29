@@ -1,0 +1,6 @@
+Mar. 6:
+	Coded bomb placer and set values around bombs to the amount of bombs around that tile
+	Attempted to create the recursion for creating a clearing around adjacencies
+Mar. 5:
+	Created game file
+	Implemented basic visuals for visualizing the mine field to be swept for later by the player.
